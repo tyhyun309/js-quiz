@@ -73,6 +73,7 @@ function showQuestion(){
     answerButtons.appendChild(button);
     if(answer.correct) {
       button.dataset.correct = answer.correct;
+      score++;
     }
     button.addEventListener("click", selectAnswer);
   });
@@ -101,4 +102,27 @@ function selectAnswer(e) {
   });
   nextButton.style.display = "block";
 }
+
+function showScore(){
+  resetState();
+}
+
+function handleNextButton(){
+  currentQuestionIndex++;
+  if(currentQuestionIndex < questions.length){
+    showQuestion();
+  }else{
+    showScore();
+  }
+}
+
+nextButton.addEventListener("click", ()=>{
+  if(currentQuestionIndex < questions.length){
+    handleNextButton();
+  }else{
+    startQuiz();
+  }
+  }
+});
+
 startQuiz();
